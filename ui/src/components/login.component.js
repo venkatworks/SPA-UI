@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-    Form, Icon, Input, Button,Row,Col
+    Form, Icon, Input, Button,Row,Col,notification
 } from 'antd';
 import WrappedSignUpModal from './sign-up.modal';
   
@@ -14,7 +14,17 @@ class Login extends React.Component{
         }
         this.showSignUp = this.showSignUp.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.openNotificationWithIcon = this.openNotificationWithIcon.bind(this);
     }
+
+    openNotificationWithIcon(type){
+        let description = type === 'success' ? 'Login Successfully' : 'Invalid credentials!';
+        notification[type]({
+          message: type,
+          description: description
+        });
+      };
+
 
     showSignUp () {
         this.setState({
@@ -33,10 +43,11 @@ class Login extends React.Component{
                 headers: {
                     'Accept': 'application/json'
                 }
-            }).then((data)=>{
-                console.log("data..:",data);
+            }).then((data)=>{       
+               console.log(data);
+               this.props.history.push('/dashboard');
             }).catch((error)=>{
-                
+                this.openNotificationWithIcon('fail');
             })
         })        
     }
