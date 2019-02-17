@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Button } from 'react-bootstrap';
+import Login from './components/login.component';
+import 'antd/dist/antd.css';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <Button>GET DATA</Button>
+        <Login></Login>
       </div>
     );
   }
